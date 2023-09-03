@@ -25,7 +25,7 @@ function PostsList() {
       }
     }
     loadPosts();
-  }, []);
+  }, );
 
   const deletePost = async (id) => {
     try {
