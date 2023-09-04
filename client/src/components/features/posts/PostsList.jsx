@@ -1,6 +1,6 @@
 // API_URL comes from the .env.development file
 import React, { useState, useEffect } from "react";
-import { API_URL } from '../../../constants';
+import { API_URL } from "../../../constants";
 
 
 function PostsList() {
