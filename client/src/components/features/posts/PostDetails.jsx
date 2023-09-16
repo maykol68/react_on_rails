@@ -6,6 +6,7 @@ function PostDetails() {
     const [, setLoading] = useState(true);
     const [, setError] = useState(null);
     const { id } = useParams();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchCurrentPost = async () => {
@@ -24,6 +25,23 @@ function PostDetails() {
         fetchCurrentPost();
     }, [id]);
 
+    const deletePost = async (id) => {
+        try {
+          // DELETE request to: http://localhost:3000/api/v1/posts/:id
+          const response = await fetch(`${API_URL}/${id}`, {
+            method: "DELETE",
+          });
+    
+          if(response.ok) {
+            setPosts(posts.filter((post) => post.id !== id ));
+          } else {
+            throw response;
+            }
+        } catch (error) {
+            console.error(error);
+        }
+      }
+
     if (!post) return <h2>Loading..</h2>;
 
     return (
@@ -31,6 +49,8 @@ function PostDetails() {
             <h2>{post.title}</h2>
             <p>{post.body}</p>
             <Link to="/">Back to Posts</Link>
+            {" | "}
+            <button onClick={() => deletePost(post.id)}>Delete</button>
         </div>
     );
 }

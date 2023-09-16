@@ -9,8 +9,8 @@ function AppRoutes() {
     return (
         <Routes>
             <Route path="/" element={<PostsList />} />
-            <Route path="/post/:id" element={<PostDetails />} />
-            <Route path="/post/:id/edit" element={<EditPostForm />} />
+            <Route path="/posts/:id" element={<PostDetails />} />
+            <Route path="/posts/:id/edit" element={<EditPostForm />} />
             <Route path="/new" element={<NewPostForm />} />
         </Routes>
     )
