@@ -3,7 +3,7 @@ import React from 'react';
 import { Route, Routes } from "react-router-dom";
 import PostDetails from './features/posts/PostDetails';
 import NewPostForm from './features/posts/NewPostForm';
-import EditPostForm from './features/posts/EditPostForm';
+import EditPostForm from './features/posts/PostEditForm';
 
 function AppRoutes() {
     return (
