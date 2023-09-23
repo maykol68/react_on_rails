@@ -2,35 +2,35 @@ import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom"; // To mock 'Link' components from 'react-router-dom'
 import AppRoutes from "./AppRoutes";
 
-jest.mock("../../features/posts/PostsList", () => {
+jest.mock("../features/posts/PostsList", () => {
   const MockPostsList = () => (
     <div>Your Matcher for PostsList component here</div>
   );
   return MockPostsList;
 });
 
-jest.mock("../../features/posts/PostDetails", () => {
+jest.mock("../features/posts/PostDetails", () => {
   const MockPostDetails = () => (
     <div>Your matcher for PostDetails component here</div>
   );
   return MockPostDetails;
 });
 
-jest.mock("../../features/posts/NewPostForm", () => {
+jest.mock("../features/posts/NewPostForm", () => {
   const MockNewPostForm = () => (
     <div>Your matcher for NewPostForm component here</div>
   );
   return MockNewPostForm;
 });
 
-jest.mock("../../features/posts/PostEditForm", () => {
+jest.mock("../features/posts/PostEditForm", () => {
   const MockPostEditForm = () => (
     <div>Your matcher for PostEditForm component here</div>
   );
   return MockPostEditForm;
 });
 
-jest.mock("../../constants", () => ({
+jest.mock("../constants", () => ({
   API_URL: "http://your-test-api-url",
 }));
 
