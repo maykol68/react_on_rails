@@ -47,16 +47,34 @@ async function updatePost(id, postData) {
 }
 
 async function deletePost(id) {
-  const response = await fetch(`${API_URL}/${id}`, {
-    method: "DELETE",
-  });
+  try {
+    const response = await fetch(`${API_URL}/${id}`, {
+      method: "DELETE",
+    });
 
-  // 204 is No Content status
-  if (response.status === 204) {
-    return null;
+  //check for HTTP error responses
+  if (!response.ok) {
+    try {
+      const errorData = await response.json();
+      throw new Error(errorDate.message || response.statusText);
+    } catch (jsonError) {
+      // if the error response body isn't JSON or doesn't exist
+      throw new Error(response.statusText);
+    }
   }
 
-  throw new Error(response.statusText);
+  // For "No Content" status
+  if (response.status === 204) {
+    return null;
+  } else {
+    return response.json();
+  }
+  } catch (error) {
+    // Handle network errors or rethrow the error from above
+  throw new Error(
+    error.message || "An error ocurred while deleting the post. "
+    );
+  }
 }
 
 export { createPost, deletePost, fetchAllPosts, fetchPost, updatePost };
