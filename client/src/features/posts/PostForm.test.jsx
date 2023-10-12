@@ -1,6 +1,7 @@
 import { render, fireEvent } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
 import PostForm from "./PostForm";
+
 describe("PostForm component", () => {
   // Post is null by default, for the instance when a new post is being created
   it("renders default inputs when no post prop is passed", () => {
