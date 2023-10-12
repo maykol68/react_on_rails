@@ -37,5 +37,12 @@ function appendToFormData(formData, formKey, value) {
     } else if (isObjectButNotFile(value)) {
         objectToFormData(value, formkey, formData)
     }
-    }
+}
+
+function appendAsDate(formData, formKey, date) {
+    formData.append(formKey, date.toISOString());
+}
+
+function isObjectButNotFile(value) {
+    return typeof value === "object" && !(value instanceof File);
 }
