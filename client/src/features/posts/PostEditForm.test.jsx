@@ -3,6 +3,8 @@ import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { fetchPost, updatePost } from "../../services/postService";
 import { act } from "react-dom/test-utils";
 import PostEditForm from "./PostEditForm";
+import { objectToFormData } from "../../utils/formDataHelper";
+
 jest.mock("../../services/postService", () => ({
   fetchPost: jest.fn(),
   updatePost: jest.fn(),
@@ -43,22 +45,26 @@ describe("PostEditForm component", () => {
     const newPost = {
       title: "New Post Title",
       body: "New Post Body",
+      image: null,
     };
+
+    const formData = objectToFormData({ post: newPost });
+
     fireEvent.change(screen.getByLabelText(/title/i), {
       target: { value: newPost.title },
     });
     fireEvent.change(screen.getByLabelText(/body/i), {
       target: { value: newPost.body },
     });
-
     await act(async () => {
       fireEvent.click(screen.getByText(/Update Post/i));
     });
 
     await waitFor(() => {
       expect(updatePost).toHaveBeenCalledTimes(1);
-      expect(updatePost).toHaveBeenCalledWith("1", newPost);
+      expect(updatePost).toHaveBeenCalledWith("1", formData);
     });
+
     expect(screen.getByText("Post Detail")).toBeInTheDocument();
   });
   it("shows a console error on update failure", async () => {
@@ -66,11 +72,9 @@ describe("PostEditForm component", () => {
     const consoleSpy = jest.spyOn(console, "error");
     consoleSpy.mockImplementation(jest.fn());
     renderForm();
-
     await waitFor(() => {
       fireEvent.click(screen.getByText(/Update Post/i));
     });
-
     await waitFor(() => {
       expect(updatePost).toHaveBeenCalledTimes(1);
     });
