@@ -1,8 +1,8 @@
-import PostsList from './features/posts/PostsList';
+import PostsList from '../features/posts/PostsList';
 import { Route, Routes } from "react-router-dom";
-import PostDetails from './features/posts/PostDetails';
-import NewPostForm from './features/posts/NewPostForm';
-import EditPostForm from './features/posts/PostEditForm';
+import PostDetails from '../features/posts/PostDetails';
+import NewPostForm from '../features/posts/NewPostForm';
+import EditPostForm from '../features/posts/PostEditForm';
 
 function AppRoutes() {
     return (
