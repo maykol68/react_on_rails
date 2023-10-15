@@ -3,17 +3,17 @@ class Api::V1::PostsController < ApplicationController
 
   # GET /posts
   def index
+    posts_per_page = 2
     @posts = Post.order(created_at: :desc)
-
-    posts_with_images = @posts.map do |post|
-      if post.image.attached?
-        post.as_json.merge(image_url: url_for(post.image))
-      else
-        post.as_json.merge(image_url: nil)
-      end
-    end
-
-    render json: posts_with_images
+    posts_with_images = paginate_posts(@posts, posts_per_page)
+    total_posts_count = Posts.count
+    
+    # Num of pages = ceil(total_posts_count / posts_per_pages) => ceil(25 / 24) = ceil(1.04) = 2
+    render json: {
+      posts: posts_with_images,
+      total_count: total_posts_count,
+      per_pages: posts_per_page
+    }
   end
 
   # GET /posts/1
