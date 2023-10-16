@@ -6,7 +6,7 @@ class Api::V1::PostsController < ApplicationController
     posts_per_page = 2
     @posts = Post.order(created_at: :desc)
     posts_with_images = paginate_posts(@posts, posts_per_page)
-    total_posts_count = Posts.count
+    total_posts_count = Post.count
     
     # Num of pages = ceil(total_posts_count / posts_per_pages) => ceil(25 / 24) = ceil(1.04) = 2
     render json: {
