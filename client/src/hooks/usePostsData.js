@@ -5,7 +5,7 @@ function usePostsData(searchTerm, page = 1) {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [ totalPosts, setTotalPosts] = useState(0); // New state for total posts count
+  const [totalPosts, setTotalPosts] = useState(0); // New state for total posts count
   const [perPage, setPerPage] = useState(10); // New state for per page count
 
   useEffect(() => {
@@ -19,8 +19,8 @@ function usePostsData(searchTerm, page = 1) {
         }
         if (data.posts) {
           setPosts(data.posts);
-          setTotalPosts(data.total_count); //Update total posts count
-          setPosts(data.per_page); // Update per page count
+          setTotalPosts(data.total_count); // Update total posts count
+          setPerPage(data.per_page); // Update per page count
         }
         setLoading(false);
       } catch (e) {
@@ -30,7 +30,7 @@ function usePostsData(searchTerm, page = 1) {
       }
     }
     loadPosts();
-  }, [searchTerm]);
+  }, [searchTerm, page ]);
 
   return { posts, loading, error, totalPosts, perPage };
 }
