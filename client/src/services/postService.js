@@ -7,7 +7,6 @@ async function fetchAllPosts(page = 1) {
   }
   return response.json();
 }
-
 async function fetchPost(id) {
   const response = await fetch(`${POSTS_API_URL}/${id}`);
   if (!response.ok) {
@@ -15,21 +14,17 @@ async function fetchPost(id) {
   }
   return response.json();
 }
-
 async function createPost(postData) {
   const response = await fetch(`${POSTS_API_URL}`, {
     method: "POST",
     // Doesn't  need headers because it's a formData
     body: postData,
   });
-
   if (!response.ok) {
     throw new Error(response.statusText);
   }
-
   return response.json();
 }
-
 async function updatePost(id, postData) {
   const response = await fetch(`${POSTS_API_URL}/${id}`, {
     method: "PUT",
@@ -40,17 +35,14 @@ async function updatePost(id, postData) {
   }
   return response.json();
 }
-
 async function deletePost(id) {
   const response = await fetch(`${POSTS_API_URL}/${id}`, {
     method: "DELETE",
   });
-
   // 204 is No Content status
   if (response.status === 204) {
     return null;
   }
-
   throw new Error(response.statusText);
 }
 
@@ -64,7 +56,6 @@ async function searchPosts(query, page = 1) {
   }
   return response.json();
 }
-
 export {
   createPost,
   deletePost,
