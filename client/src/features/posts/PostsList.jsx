@@ -18,6 +18,7 @@ function PostsList() {
 
   const initialPageFromURL = Number(searchParams.get("page") || "1");
   const [currentPage, setCurrentPage] = useState(initialPageFromURL);
+  const [perPage, setPerPage] = useState(10)
 
   const [posts, setPosts] = useState([]);
   const {
@@ -25,7 +26,6 @@ function PostsList() {
     totalPosts: totalPosts,
     loading: loading,
     error: error,
-    perPage: perPage,
   } = usePostsData(debouncedSearchTerm, currentPage); // Note the change here
 
   useEffect(() => {
