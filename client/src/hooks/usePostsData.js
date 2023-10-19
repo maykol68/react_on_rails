@@ -12,9 +12,11 @@ function usePostsData(searchTerm, page = 1) {
     async function loadPosts() {
       try {
         let data;
+        
         if (searchTerm) {
           data = await searchPosts(searchTerm, page);
         } else {
+          console.log("hola")
           data = await fetchAllPosts(page);
         }
         if (data.posts) {
